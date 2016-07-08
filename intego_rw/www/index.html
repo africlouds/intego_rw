@@ -1,0 +1,34 @@
+<div class="page-container" id="page-signup">
+<div class="row">
+        <div class="col-lg-5">
+		<h1>Intego!</h1>
+		<p>
+			ERP for SMEs
+		</p>
+                <form class="form-horizontal" role="form">
+                  <div class="form-group form-group-lg input-group">
+                      <input type="text" name="domain_name" class="form-control" id="exampleInputAmount" placeholder="Business Name">
+                      <div class="input-group-addon">.intego.rw</div>
+                  </div>
+                  <div class="form-group form-group-lg">
+                    <input type="email" name="email"  class="form-control col-sm-12" id="inputError1" placeholder="Your Email">
+                  </div>
+                  <div class="form-group form-group-lg">
+                        <a class="btn btn-lg btn-success btn-request col-sm-12" type="button">Sign Up</a>
+                  </div>
+                </form>
+        </div>
+
+
+        <div class="col-lg-7">
+		<img src="/assets/intego_rw/img/so.png" />
+        </div>
+</div>
+</div>
+<script>
+        {% include "intego_rw/templates/includes/signup.js" %}
+        frappe.ready(function() {
+                setup_signup($('#page-signup'));
+        });
+</script>
+
