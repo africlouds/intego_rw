@@ -38,7 +38,7 @@ setup_signup = function(page) {
 		frappe.call({
                         method:"saas.api.signup",
                         args: {
-				domain_name : args.domain_name + ".intego.erp",
+				domain_name : args.domain_name + ".intego.rw",
 				email : args.email,
 				telephone: args.telephone 
 			},
