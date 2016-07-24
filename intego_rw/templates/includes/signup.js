@@ -4,6 +4,19 @@ setup_signup = function(page) {
 		// fallback
 		var page = $('#page-signup,#page-signup-1');
 	}
+
+	page.find('#custom-domain').off('click').on('click', function(){
+
+		$("#intego").remove()
+		$("#domain-name-input").addClass("col-sm-12")
+		$("#subdomain-input").removeClass("input-group")
+		$("#own-domain").remove()
+		$("#main-domain").val('')
+
+
+
+
+	});
 	page.find('.btn-request').off('click').on('click', function() {
 		var args = {};
 		$.each(page.find("form input"), function(i, input) {
@@ -20,9 +33,18 @@ setup_signup = function(page) {
 		}
 
 		// subdomain in one word
-		if(args.domain_name.search(/^[a-z0-9][-a-z0-9]*[a-z0-9]$/)===-1) {
-			frappe.msgprint("Sub-domain can only contain letters, numbers and hyphens and have at least 2 caracters. Please try again.");
-			return false;
+		if(args.main_domain != ""){
+			if(args.domain_name.search(/^[a-z0-9][-a-z0-9]*[a-z0-9]$/)===-1) {
+				frappe.msgprint("Sub-domain can only contain letters, numbers and hyphens and have at least 2 caracters. Please try again.");
+				return false;
+			}
+		}
+		else{
+			if(args.domain_name.search(/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/)===-1) {
+				frappe.msgprint("Invalid Domain name. Please try again!");
+				return false;
+			}
+
 		}
 
 		var MAX_LENGTH = 20;
@@ -38,12 +60,11 @@ setup_signup = function(page) {
 		frappe.call({
                         method:"saas.api.signup",
                         args: {
-				domain_name : args.domain_name + ".intego.rw",
-				email : args.email,
-				telephone: args.telephone 
+				domain_name : args.domain_name + args.main_domain,
+				email : args.email
 			},
                         callback: function(data){
-				frappe.msgprint("Great");
+				window.location.href = data.message.location;
 			}
 		});
 
