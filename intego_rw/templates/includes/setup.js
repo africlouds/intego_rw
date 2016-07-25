@@ -7,6 +7,7 @@ setup_setup= function(page) {
 
 	var code = get_url_arg('code');
 	var name = get_url_arg('name');
+	/*
 	if(code && name){
 		frappe.call({
 			method: "frappe.client.get",
@@ -20,7 +21,7 @@ setup_setup= function(page) {
 			}
                 });
 
-	}
+	}*/
 
 	page.find('#btn-setup').off('click').on('click', function() {
 		var args = {};
